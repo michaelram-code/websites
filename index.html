@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaniTech Academy: Growth Strategy 2025</title>
+    <style>
+        :root {
+            --primary: #2563eb;       /* Royal Blue */
+            --primary-dark: #1e40af;
+            --accent: #06b6d4;        /* Cyan */
+            --bg: #f1f5f9;            /* Light Gray Blue */
+            --sidebar-bg: #0f172a;    /* Dark Navy */
+            --text-main: #334155;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --success: #10b981;
+            --font: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* --- Sidebar Navigation --- */
+        aside {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: var(--white);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 2rem 1rem;
+            z-index: 100;
+        }
+
+        aside h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul { list-style: none; }
+        
+        nav li { margin-bottom: 0.5rem; }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--white);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* --- Main Content --- */
+        main {
+            margin-left: 260px;
+            padding: 3rem 4rem;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--sidebar-bg);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        p { margin-bottom: 1rem; color: var(--text-main); }
+
+        /* --- Components --- */
+        
+        /* Cards */
+        .grid-2, .grid-3 {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+        .card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .card.urgent { border-top-color: #ef4444; }
+        .card.highlight { border-top-color: var(--accent); background: #f8fafc; }
+
+        /* Executive Summary Box */
+        .exec-summary {
+            background: linear-gradient(135deg, var(--primary), var(--sidebar-bg));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        .exec-summary h2 { color: white; border: none; }
+        .exec-summary p { color: #e2e8f0; font-size: 1.1rem; }
+
+        /* Priority List */
+        .priority-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .priority-number {
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Funnel Visualization */
+        .funnel-stage {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .tof { background-color: #93c5fd; width: 100%; color: #1e3a8a; }
+        .mof { background-color: #3b82f6; width: 80%; margin-left: 10%; }
+        .bof { background-color: #1e40af; width: 60%; margin-left: 20%; }
+
+        /* Timeline for Emails */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid #cbd5e1;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        /* Code/Script Box */
+        .script-box {
+            background: #1e293b;
+            color: #a5f3fc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            position: relative;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .script-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            border-bottom-left-radius: 8px;
+            color: white;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-red { background: #fee2e2; color: #991b1b; }
+        .badge-green { background: #d1fae5; color: #065f46; }
+        .badge-blue { background: #dbeafe; color: #1e40af; }
+
+        /* Details/Summary for expanding content */
+        details {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        summary {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        details p { margin-top: 1rem; margin-bottom: 0; }
+
+        @media (max-width: 1024px) {
+            aside { display: none; }
+            main { margin-left: 0; padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <h1>PaniTech<br>Strategy</h1>
+        <nav>
+            <ul>
+                <li><a href="#summary">Executive Summary</a></li>
+                <li><a href="#priorities">Top Priorities</a></li>
+                <li><a href="#ads">Facebook Ads Strategy</a></li>
+                <li><a href="#organic">Organic Content</a></li>
+                <li><a href="#funnels">Lead Magnets & LP</a></li>
+                <li><a href="#nurture">Nurture & Email</a></li>
+                <li><a href="#scripts">Scripts & Templates</a></li>
+                <li><a href="#implementation">Implementation</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <section id="summary" class="exec-summary">
+            <h2>Executive Summary</h2>
+            <p><strong>The Strategy:</strong> Prioritize conversion-focused <strong>Facebook Lead Ads</strong> + aggressive <strong>short-form video</strong> (TikTok / Reels / Shorts) to create a low-friction lead magnet funnel.</p>
+            <p style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem;">
+                <strong>The Conversion Engine:</strong> Convert leads with a fast follow-up system (SMS + email + remarketing) and high-credibility proof (graduate outcomes, testimonials, micro-projects). This produces the fastest lift in volume + cost-per-enrollment.
+            </p>
+        </section>
+
+        <section id="priorities">
+            <h2>Top Priorities (Ranked by Impact)</h2>
+            <div class="grid-2">
+                <div class="card urgent">
+                    <h3>1. Fix Lead Capture (Immediate)</h3>
+                    <p>Switch to Meta Lead Ads + instant server-side sync to CRM.</p>
+                    <p><strong>The Key:</strong> Immediate SMS + email auto-response inside 5 minutes. Most conversions are lost here.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Short-Form Video (3-4 Weeks)</h3>
+                    <p>Produce 8–12 TikTok/Reels/Shorts showing outcomes, day-in-the-life, and demo lessons.</p>
+                    <p><strong>Why:</strong> Creates huge organic reach and builds trust before the click.</p>
+                </div>
+                <div class="card">
+                    <h3>3. High-Intent Remarketing</h3>
+                    <p>Build 3 audiences: Viewed LP, Started Application, Watched Webinar.</p>
+                    <p>Run sequential creatives to close the loop.</p>
+                </div>
+                <div class="card">
+                    <h3>4. LP Optimization (1 Week)</h3>
+                    <p>Implement a single, high-clarity landing page with immediate FAQ, curriculum highlights, and video social proof.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ads">
+            <h2>Facebook Ads Strategy</h2>
+            <div class="grid-3" style="margin-bottom: 2rem;">
+                <div class="card">
+                    <div class="funnel-stage tof">TOF: Awareness</div>
+                    <p><strong>Goal:</strong> Video Views / Traffic</p>
+                    <p><strong>Creative:</strong> 15-30s Short Videos (Outcomes, Micro-lessons).</p>
+                    <p><strong>Target:</strong> Interest (CompTIA, Career Change) & Broad.</p>
+                </div>
+                <div class="card">
+                    <div class="funnel-stage mof">MOF: Lead Gen</div>
+                    <div class="badge badge-green">Primary Driver</div>
+                    <p><strong>Goal:</strong> Leads (Instant Forms)</p>
+                    <p><strong>Offer:</strong> Free "Intro to Cybersecurity" Live Workshop.</p>
+                    <p><strong>Format:</strong> Instant forms for low friction.</p>
+                </div>
+                <div class="card">
+                    <div class="funnel-stage bof">BOF: Conversion</div>
+                    <p><strong>Goal:</strong> Applications / Enroll</p>
+                    <p><strong>Audience:</strong> Webinar attendees, Form openers.</p>
+                    <p><strong>Offer:</strong> Limited Seats + Early Bird Discount.</p>
+                </div>
+            </div>
+
+            <h3>Budget Split (First 60 Days)</h3>
+            <ul>
+                <li><strong>Test Phase (Day 1-14):</strong> 60% TOF (Views), 40% MOF (Lead Ads).</li>
+                <li><strong>Scale Phase (Day 15+):</strong> Move budget to best TOF creative & Lookalikes. Increase MOF spend.</li>
+            </ul>
+        </section>
+
+        <section id="organic">
+            <h2>Organic Content Strategy</h2>
+            <p><em>Cadence: 4–6 posts/week across TikTok, Reels, Shorts, LinkedIn.</em></p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Weekly Content Rhythm</h3>
+                    <ul style="list-style-type: none;">
+                        <li>📅 <strong>Mon:</strong> Student success story (60-90s video)</li>
+                        <li>📅 <strong>Tue:</strong> Micro-lesson (Instructor teardown of alert)</li>
+                        <li>📅 <strong>Wed:</strong> Carousel: "What you build in Week 1"</li>
+                        <li>📅 <strong>Thu:</strong> Live Q&A (Promote 30 mins prior)</li>
+                        <li>📅 <strong>Fri:</strong> Behind-the-scenes / Job Outcomes</li>
+                    </ul>
+                </div>
+                <div class="card highlight">
+                    <h3>Winning Formats</h3>
+                    <ul>
+                        <li><strong>Micro-lessons:</strong> 45s instructor teardown of a real SOC alert.</li>
+                        <li><strong>Outcome Spots:</strong> "From zero to SOC analyst in 3 months."</li>
+                        <li><strong>Student Story:</strong> Before job vs. After job.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="funnels">
+            <h2>Lead Magnet & Landing Page</h2>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Primary Funnel: The Live Workshop</h3>
+                    <p><strong>Offer:</strong> "Free 45-minute Live Bootcamp Preview"</p>
+                    <p><strong>Mechanism:</strong> Meta Lead Ad (Instant Form) → CRM Sync → SMS/Email.</p>
+                    <p><strong>Conversion:</strong> Attendee → 15min Admissions Call.</p>
+                </div>
+                <div class="card">
+                    <h3>Landing Page Structure</h3>
+                    <ol>
+                        <li><strong>Hero:</strong> "Become Job-Ready in 3 Months" + CTA.</li>
+                        <li><strong>Why Us:</strong> Credentials, Labs, Support.</li>
+                        <li><strong>Outcomes:</strong> Real salary stats & logos.</li>
+                        <li><strong>Curriculum:</strong> Week-by-week snapshot.</li>
+                        <li><strong>Social Proof:</strong> Video testimonials.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="nurture">
+            <h2>Nurture Sequence (Email + SMS)</h2>
+            <p>Core Idea: Speed + Relevance. Contact leads within 5 minutes.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>0 Minutes: Instant Response</h4>
+                    <p><span class="badge badge-green">SMS</span> "Thanks for signing up! Here is your workshop link. - PaniTech Admissions"</p>
+                    <p><span class="badge badge-blue">Email</span> Welcome + What to expect + 30s testimonial video.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>24 Hours: Workshop Reminder</h4>
+                    <p><span class="badge badge-green">SMS</span> "Reminder: Workshop tomorrow at [Time]. Add to calendar."</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Day 0 (Post-Workshop): The Hook</h4>
+                    <p><span class="badge badge-blue">Email</span> Recording link + CTA to book interview.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Day 2: Social Proof</h4>
+                    <p><span class="badge badge-blue">Email</span> Student Success Story (Transformation focused).</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Day 7: Urgency</h4>
+                    <p><span class="badge badge-red">Offer</span> "Save $500 - Apply this week" (Countdown).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="scripts">
+            <h2>Copy & Scripts (Ready to Paste)</h2>
+            
+            <div class="grid-2">
+                <div>
+                    <h3>TOF Video Hook Script</h3>
+                    <div class="script-box">
+<span class="script-label">Video Ad</span>
+(0–3s) Text Overlay: "No experience → Cybersecurity job in 3 months"
+
+(3–12s) Voice: "I went from retail to a SOC role in 12 weeks. Here’s how—" (Quick cut to student)
+
+(12–24s) Visuals: Show lab interface, instructor, mock interview. Voice: "Hands-on labs, live classes, job support."
+
+(24–30s) CTA: "Free workshop — seats limited. Link in bio."
+                    </div>
+                </div>
+
+                <div>
+                    <h3>SMS: Immediate Follow-up</h3>
+                    <div class="script-box">
+<span class="script-label">SMS</span>
+"Hi {{name}}, it’s PaniTech. 
+
+Thanks for grabbing a seat at the workshop! 
+
+Here is the calendar link to save your spot: {{link}}. 
+
+See you there!"
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top:2rem;">Email Templates (Expand to View)</h3>
+            
+            <details>
+                <summary>Email 1: Welcome + CTA</summary>
+                <div class="script-box" style="background:#f8fafc; color:#334155; border:1px solid #cbd5e1;">
+Subject: You’re In! Here’s Your Next Step 👉
+
+Hi {{name}},
+
+Welcome to PaniTech Academy! 🎉
+You’ve taken your first step toward a future-proof cybersecurity career.
+
+Your next step:
+👉 Reserve your seat in our Free Live Cybersecurity Workshop
+Get access here: {{Workshop Link}}
+
+In this 45-minute live session, you’ll see:
+✔ What cybersecurity analysts actually do
+✔ How complete beginners become job-ready in 3 months
+✔ A real incident-response lab demo
+
+See you inside!
+PaniTech Admissions Team
+                </div>
+            </details>
+
+            <details>
+                <summary>Email 3: Student Success Story</summary>
+                <div class="script-box" style="background:#f8fafc; color:#334155; border:1px solid #cbd5e1;">
+Subject: How She Went From Retail to Cybersecurity
+
+Hi {{name}},
+
+If you think you need experience to break into cybersecurity, meet Angela.
+She was working in retail. No technical background.
+
+Fast-forward 12 weeks → she’s now a Tier 1 SOC Analyst for a financial firm.
+
+Inside the program, she learned:
+🔹 How to analyze attacks
+🔹 How to use SIEM tools
+🔹 How to respond to real incidents
+
+You can follow the same path.
+Start by joining our free workshop: {{Workshop Link}}
+
+Talk soon,
+PaniTech Admissions Team
+                </div>
+            </details>
+        </section>
+
+        <section id="implementation">
+            <h2>Implementation Checklist (First 14 Days)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Week 1: Build & Launch</h3>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>Create Workshop Landing Page (Meta Pixel + CAPI).</li>
+                        <li>Build Meta Campaign (3 TOF Videos + Lead Ad).</li>
+                        <li>Configure CRM Sync + SMS Auto-responder (5 min rule).</li>
+                        <li>Produce 6 short videos from existing content.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Week 2: Optimize</h3>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>Set up Retargeting Audiences (Video Viewers).</li>
+                        <li>Launch 1 Live Workshop (Promote heavily).</li>
+                        <li>Track CPL daily. Pause low performers.</li>
+                        <li>A/B Test CTA: "Book Workshop" vs "Get Guide".</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card urgent" style="margin-top: 1.5rem;">
+                <h3>Quick Wins You Can Do Today</h3>
+                <ol style="padding-left: 1.2rem; font-weight: 500;">
+                    <li>Switch to Meta Lead Ads for the workshop to lower friction.</li>
+                    <li>Reuse an instructor recording—edit into three 30–60s reels for TOF.</li>
+                    <li>Enable SMS auto-response for every new lead.</li>
+                </ol>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Simple script to highlight active section in sidebar
+        const sections = document.querySelectorAll("section");
+        const navLi = document.querySelectorAll("nav ul li a");
+
+        window.onscroll = () => {
+            var current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLi.forEach((a) => {
+                a.classList.remove("active");
+                if (a.classList.contains(current)) {
+                    a.classList.add("active");
+                }
+                if (a.getAttribute('href') == "#" + current) {
+                    a.classList.add("active");
+                }
+            });
+        };
+    </script>
+</body>
+</html>
